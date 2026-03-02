@@ -2,20 +2,25 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, "");
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// Função para limpar e validar as chaves do Supabase vindas do ambiente
+const cleanEnvVar = (value: string | undefined) => {
+  if (!value) return "";
+  // Remove aspas, espaços e barras finais que podem vir de erros de configuração no deploy
+  return value.replace(/['"]+/g, "").trim().replace(/\/$/, "");
+};
+
+const SUPABASE_URL = cleanEnvVar(import.meta.env.VITE_SUPABASE_URL);
+const SUPABASE_PUBLISHABLE_KEY = cleanEnvVar(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
 
 // Verificação de segurança para evitar erro de inicialização silencioso
-console.log("Iniciando Supabase com URL:", SUPABASE_URL);
-
-if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-  console.error("ERRO CRÍTICO: Variáveis de ambiente do Supabase não definidas no .env!");
+if (typeof window !== "undefined") {
+  console.log("Supabase Client: Inicializando...");
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+    console.error("ERRO CRÍTICO: Chaves do Supabase não encontradas. Verifique as Environment Variables no painel de deploy.");
+  }
 }
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-
-export const supabase = createClient<Database>(SUPABASE_URL || "", SUPABASE_PUBLISHABLE_KEY || "", {
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,
