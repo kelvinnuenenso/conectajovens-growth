@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import LeadCaptureDialog from "./LeadCaptureDialog";
 
 const CTASection = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       {/* Background Effects */}
@@ -32,15 +28,16 @@ const CTASection = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              variant="hero" 
-              size="xl" 
-              className="w-full sm:w-auto"
-              onClick={() => setIsDialogOpen(true)}
-            >
-              Quero Entrar Agora
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+            <a href="#captura" className="w-full sm:w-auto">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="w-full"
+              >
+                Quero Entrar Agora
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </a>
             <Button variant="hero-outline" size="xl" className="w-full sm:w-auto">
               Falar com a Equipe
             </Button>
@@ -49,12 +46,12 @@ const CTASection = () => {
           {/* Trust Indicators */}
           <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-12 border-t border-border/50">
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">7 dias</div>
-              <div className="text-sm text-foreground/60">Garantia de satisfação</div>
+              <div className="text-2xl font-bold text-primary">Comunidade</div>
+              <div className="text-sm text-foreground/60">Crescimento real</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">24h</div>
-              <div className="text-sm text-foreground/60">Acesso imediato</div>
+              <div className="text-2xl font-bold text-primary">Networking</div>
+              <div className="text-sm text-foreground/60">Conexões valiosas</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">100%</div>
@@ -63,9 +60,6 @@ const CTASection = () => {
           </div>
         </div>
       </div>
-
-      {/* Lead Capture Dialog */}
-      <LeadCaptureDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </section>
   );
 };

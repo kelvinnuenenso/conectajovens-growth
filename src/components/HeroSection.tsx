@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import LeadCaptureDialog from "./LeadCaptureDialog";
 
 const HeroSection = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Effects */}
@@ -43,18 +39,21 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <Button 
-              variant="hero" 
-              size="xl" 
-              className="w-full sm:w-auto"
-              onClick={() => setIsDialogOpen(true)}
-            >
-              Entrar para a Comunidade
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button variant="hero-outline" size="xl" className="w-full sm:w-auto">
-              Conhecer Mais
-            </Button>
+            <a href="#captura" className="w-full sm:w-auto">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="w-full"
+              >
+                Entrar para a Comunidade
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </a>
+            <a href="#sobre" className="w-full sm:w-auto">
+              <Button variant="hero-outline" size="xl" className="w-full">
+                Conhecer Mais
+              </Button>
+            </a>
           </div>
 
           {/* Stats */}
@@ -77,9 +76,6 @@ const HeroSection = () => {
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-
-      {/* Lead Capture Dialog */}
-      <LeadCaptureDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </section>
   );
 };

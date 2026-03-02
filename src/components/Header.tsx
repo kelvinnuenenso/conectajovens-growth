@@ -18,7 +18,6 @@ const Header = () => {
     { href: "#sobre", label: "Sobre" },
     { href: "#como-funciona", label: "Como Funciona" },
     { href: "#beneficios", label: "Benefícios" },
-    { href: "#planos", label: "Planos" },
   ];
 
   return (
@@ -56,12 +55,16 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="hero-outline" size="sm">
-              Conhecer Mais
-            </Button>
-            <Button variant="hero" size="sm">
-              Entrar para a Comunidade
-            </Button>
+            <a href="#sobre">
+              <Button variant="hero-outline" size="sm">
+                Conhecer Mais
+              </Button>
+            </a>
+            <a href="#captura">
+              <Button variant="hero" size="sm">
+                Entrar para a Comunidade
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,12 +91,16 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="hero-outline" className="w-full">
-                  Conhecer Mais
-                </Button>
-                <Button variant="hero" className="w-full">
-                  Entrar para a Comunidade
-                </Button>
+                <a href="#sobre" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="hero-outline" className="w-full">
+                    Conhecer Mais
+                  </Button>
+                </a>
+                <a href="#captura" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="hero" className="w-full">
+                    Entrar para a Comunidade
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
