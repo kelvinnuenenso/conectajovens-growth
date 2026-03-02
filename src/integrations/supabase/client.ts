@@ -12,11 +12,16 @@ const cleanEnvVar = (value: string | undefined) => {
 const SUPABASE_URL = cleanEnvVar(import.meta.env.VITE_SUPABASE_URL);
 const SUPABASE_PUBLISHABLE_KEY = cleanEnvVar(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
 
-// Verificação de segurança para evitar erro de inicialização silencioso
+// Diagnóstico detalhado de produção (parcialmente mascarado)
+const maskValue = (val: string) => val ? `${val.substring(0, 10)}...${val.substring(val.length - 4)}` : "indefinido";
+
 if (typeof window !== "undefined") {
-  console.log("Supabase Client: Inicializando...");
+  console.log("Supabase Client Init:");
+  console.log("- URL:", maskValue(SUPABASE_URL));
+  console.log("- Key (prefixo):", SUPABASE_PUBLISHABLE_KEY ? SUPABASE_PUBLISHABLE_KEY.substring(0, 15) : "ausente");
+  
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    console.error("ERRO CRÍTICO: Chaves do Supabase não encontradas. Verifique as Environment Variables no painel de deploy.");
+    console.error("ERRO: Variáveis de ambiente faltando no build de produção.");
   }
 }
 

@@ -89,6 +89,12 @@ const LeadCaptureSection = () => {
       setIsSubmitted(true);
     } catch (error: any) {
       console.error("Erro completo capturado na seção de captura:", error);
+      console.log("Contexto do Erro:", {
+        message: error.message,
+        name: error.name,
+        stack: error.stack,
+        url: import.meta.env.VITE_SUPABASE_URL, // Verificando URL no momento do erro
+      });
       
       let errorMessage = "Tente novamente em alguns instantes.";
       
